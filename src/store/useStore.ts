@@ -21,6 +21,7 @@ export interface Friend {
   lastMessage?: string
   timestamp?: string
   unreadCount?: number
+  birthday?: string
 }
 
 export interface Message {

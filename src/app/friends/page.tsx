@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Search, UserPlus, Heart, Calendar, Star, Users } from 'lucide-react'
 import { useStore } from '@/store/useStore'
-import { MobileLayout } from '@/components/layout/MobileLayout'
+import MobileLayout from '@/components/layout/MobileLayout'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
