@@ -1,43 +1,43 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { useStore } from '@/store/useStore'
-import { Search, Send, Paperclip, Smile, Calendar, Clock, Folder, Plus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Avatar } from '@/components/ui/avatar'
-import MobileLayout from '@/components/layout/MobileLayout'
-import { mockChatMessages, MockChatMessage, addChatMessage } from '@/mock'
+"use client";
+import React, { useEffect, useState } from "react";
+
+import { Search, Smile, Calendar, Clock, Folder, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Avatar } from "@/components/ui/avatar";
+import MobileLayout from "@/components/layout/MobileLayout";
+import { mockChatMessages, MockChatMessage, addChatMessage } from "@/mock";
 
 export default function ChatPage() {
-  const [mounted, setMounted] = useState(false)
-  const [message, setMessage] = useState('')
-  const [chatMessages, setChatMessages] = useState<MockChatMessage[]>([])
+  const [mounted, setMounted] = useState(false);
+  const [message, setMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState<MockChatMessage[]>([]);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (mounted && chatMessages.length === 0) {
-      setChatMessages(mockChatMessages)
+      setChatMessages(mockChatMessages);
     }
-  }, [mounted, chatMessages.length])
+  }, [mounted, chatMessages.length]);
 
   const handleSendMessage = () => {
     if (message.trim()) {
       const newMessage = addChatMessage({
-        senderId: '1',
-        senderName: '나',
+        senderId: "1",
+        senderName: "나",
         content: message,
-        type: 'text'
-      })
-      setChatMessages([...chatMessages, newMessage])
-      setMessage('')
+        type: "text",
+      });
+      setChatMessages([...chatMessages, newMessage]);
+      setMessage("");
     }
-  }
+  };
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
@@ -73,16 +73,18 @@ export default function ChatPage() {
           {chatMessages.map((msg: MockChatMessage) => (
             <div
               key={msg.id}
-              className={`flex ${msg.senderId === '1' ? 'justify-end' : 'justify-start'}`}
+              className={`flex ${
+                msg.senderId === "1" ? "justify-end" : "justify-start"
+              }`}
             >
               <div
                 className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                  msg.senderId === '1'
-                    ? 'bg-yellow-400 text-gray-900'
-                    : 'bg-white text-gray-900 border border-gray-200'
+                  msg.senderId === "1"
+                    ? "bg-yellow-400 text-gray-900"
+                    : "bg-white text-gray-900 border border-gray-200"
                 }`}
               >
-                {msg.type === 'reply' && (
+                {msg.type === "reply" && (
                   <div className="text-xs text-gray-500 mb-1 border-l-2 border-gray-300 pl-2">
                     김도이 언니에게 답장
                   </div>
@@ -119,14 +121,17 @@ export default function ChatPage() {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="메시지 입력"
               className="flex-1"
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
             />
-            <Button onClick={handleSendMessage} className="bg-blue-500 hover:bg-blue-600">
+            <Button
+              onClick={handleSendMessage}
+              className="bg-blue-500 hover:bg-blue-600"
+            >
               전송
             </Button>
           </div>
         </div>
       </div>
     </MobileLayout>
-  )
+  );
 }
