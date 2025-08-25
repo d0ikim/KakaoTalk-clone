@@ -6,15 +6,18 @@ import { Input } from "@/components/ui/input";
 import { mockUser } from "@/mock";
 import MobileLayout from "@/components/layout/MobileLayout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRouter } from "next/navigation";
 
 export default function LockPage() {
   const [password, setPassword] = useState("");
   const { setIsLocked, setUser, setCurrentPage } = useStore();
+  const router = useRouter();
 
   const handleUnlock = () => {
     if (password === "1234") { // 간단한 비밀번호 체크 (실제로는 더 안전한 방식 사용)
       setIsLocked(false);
-      setCurrentPage("chat");
+      setCurrentPage("chats");
+      router.push("/chats");
     } else {
       alert("비밀번호가 올바르지 않습니다.");
       setPassword("");
