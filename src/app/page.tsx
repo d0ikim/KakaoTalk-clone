@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "@/store/useStore";
 import LockPage from "./lock/page";
+import LoginPage from "./login/page";
 import FriendsPage from "./friends/page";
 import SettingsPage from "./settings/page";
 import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
-  const { currentPage, isLocked } = useStore();
+  const { currentPage, isLocked, user } = useStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -18,16 +19,22 @@ export default function HomePage() {
 
   useEffect(() => {
     // 로그인 후 기본 페이지를 /chats로 리다이렉트
-    if (!isLocked && currentPage === "chat") {
+    if (user && !isLocked && currentPage === "chat") {
       const timer = setTimeout(() => {
         router.push("/chats");
       }, 0);
       return () => clearTimeout(timer);
     }
-  }, [isLocked, currentPage, router]);
+  }, [user, isLocked, currentPage, router]);
 
   // 페이지 렌더링 함수
   const renderPage = () => {
+    // 사용자가 없으면 로그인 페이지
+    if (!user) {
+      return <LoginPage />;
+    }
+
+    // 잠금 모드면 잠금 페이지
     if (isLocked) {
       return <LockPage />;
     }
@@ -41,8 +48,9 @@ export default function HomePage() {
       case "settings":
         return <SettingsPage />;
       default:
-        // 기본 페이지는 LockPage (로그인 화면)
-        return <LockPage />;
+        // 기본 페이지는 채팅리스트
+        router.push("/chats");
+        return null;
     }
   };
 

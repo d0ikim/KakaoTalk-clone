@@ -3,86 +3,105 @@ import React, { useState } from "react";
 import { useStore } from "@/store/useStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Lock, QrCode, Eye, EyeOff } from "lucide-react";
 import { mockUser } from "@/mock";
 import MobileLayout from "@/components/layout/MobileLayout";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function LockPage() {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setIsLocked, setUser, setCurrentPage } = useStore();
 
-  const handleLogin = () => {
-    if (email && password) {
-      setUser(mockUser);
+  const handleUnlock = () => {
+    if (password === "1234") { // 간단한 비밀번호 체크 (실제로는 더 안전한 방식 사용)
       setIsLocked(false);
       setCurrentPage("chat");
+    } else {
+      alert("비밀번호가 올바르지 않습니다.");
+      setPassword("");
+    }
+  };
+
+  const handleSwitchUser = () => {
+    // 다른 사용자로 전환 (로그아웃)
+    setUser(null);
+    setIsLocked(false);
+    setCurrentPage("login");
+    // 메인 페이지로 이동
+    window.location.href = "/";
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleUnlock();
     }
   };
 
   return (
     <MobileLayout showLeftNav={false}>
-      <div className="h-full bg-gradient-to-br from-[#0f172a] to-[rgb(20,29,44)] flex flex-col items-center justify-center p-4 sm:p-6">
-        {/* TALK 로고 */}
-        <div className="mb-6 sm:mb-8 flex flex-col items-center">
-          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-700 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-            <QrCode className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-400" />
-          </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-50">TALK</h1>
-        </div>
-
-        {/* 로그인 폼 */}
-        <div className="w-full max-w-xs sm:max-w-sm space-y-3 sm:space-y-4">
-          <Input
-            type="email"
-            placeholder="카카오계정 (이메일 또는 전화번호)"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="bg-white border-0 rounded-lg h-9 sm:h-11 text-gray-800 placeholder-gray-500 text-xs sm:text-sm"
-          />
-
-          <Input
-            type="password"
-            placeholder="비밀번호"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="bg-white border-0 rounded-lg h-9 sm:h-11 text-gray-800 placeholder-gray-500 text-xs sm:text-sm"
-          />
-
-          <Button
-            onClick={handleLogin}
-            className="w-full bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg h-9 sm:h-11 text-sm sm:text-base font-medium"
-          >
-            로그인
-          </Button>
-
-          <div className="text-center text-gray-700 text-xs sm:text-sm">
-            또는
+      <div className="h-full bg-gradient-to-br from-pink-50 to-pink-100 flex flex-col items-center justify-center p-4">
+        {/* 잠금 모드 제목 */}
+        <h1 className="text-2xl font-bold text-pink-900 mb-8">잠금 모드</h1>
+        
+        {/* 모바일 디바이스 모양의 잠금 화면 */}
+        <div className="w-80 h-96 bg-pink-200 rounded-3xl p-6 shadow-2xl border-4 border-pink-300 relative">
+          {/* 윈도우 컨트롤 버튼들 */}
+          <div className="flex space-x-2 mb-6">
+            <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-400 rounded-full"></div>
           </div>
 
-          <Button
-            variant="outline"
-            className="w-full bg-white border-indigo-300 text-indigo-700 hover:bg-gray-50 rounded-lg h-9 sm:h-11 text-xs sm:text-sm"
-          >
-            <Lock className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-            QR코드 로그인
-          </Button>
+          {/* 프로필 정보 */}
+          <div className="flex flex-col items-center mb-8">
+            <Avatar className="w-20 h-20 mb-4 border-4 border-white shadow-lg">
+              <AvatarImage src={mockUser.avatar} />
+              <AvatarFallback className="text-2xl font-bold bg-pink-300 text-white">
+                {mockUser.name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            <p className="text-sm text-pink-800 font-medium">
+              {mockUser.email.replace(/(.{2}).*@/, "$1***********@")}
+            </p>
+          </div>
 
-          <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-gray-700">
-            <input
-              type="checkbox"
-              id="autoLogin"
-              className="w-3 h-3 sm:w-4 sm:h-4"
+          {/* 잠금 모드 상태 */}
+          <div className="text-center mb-6">
+            <p className="text-lg font-bold text-pink-900">
+              잠금모드 상태입니다.
+            </p>
+          </div>
+
+          {/* 비밀번호 입력 */}
+          <div className="mb-6">
+            <Input
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="w-full bg-white border-pink-300 focus:border-pink-500 focus:ring-pink-500 text-center text-pink-900 placeholder-pink-600"
             />
-            <label htmlFor="autoLogin">자동 로그인</label>
           </div>
-        </div>
 
-        {/* 하단 링크 */}
-        <div className="mt-6 sm:mt-8 flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-indigo-700">
-          <button className="hover:underline">카카오계정 찾기</button>
-          <div className="w-px h-3 sm:h-4 bg-gray-400"></div>
-          <button className="hover:underline">비밀번호 재설정</button>
+          {/* 확인 버튼 */}
+          <div className="mb-6">
+            <Button
+              onClick={handleUnlock}
+              className="w-full bg-pink-300 hover:bg-pink-400 text-pink-900 border border-pink-400 font-medium"
+            >
+              확인
+            </Button>
+          </div>
+
+          {/* 다른 사용자로 전환 */}
+          <div className="text-center">
+            <button
+              onClick={handleSwitchUser}
+              className="text-sm text-pink-700 hover:text-pink-900 underline"
+            >
+              다른 사용자로 전환
+            </button>
+          </div>
         </div>
       </div>
     </MobileLayout>

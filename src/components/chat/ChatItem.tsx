@@ -18,14 +18,14 @@ export default function ChatItem({ chat, onClick }: ChatItemProps) {
   return (
     <div
       onClick={onClick}
-      className="px-4 py-3 border-b border-gray-50 hover:bg-gray-50 cursor-pointer transition-colors"
+      className="px-4 py-3 border-b border-border hover:bg-muted cursor-pointer transition-colors"
     >
       <div className="flex items-center space-x-3">
         {/* Avatar */}
         <div className="relative">
           <Avatar className="w-12 h-12">
             <AvatarImage src={chat.avatar} />
-            <AvatarFallback className="text-sm font-medium bg-gray-200">
+            <AvatarFallback className="text-sm font-medium bg-muted text-muted-foreground">
               {chat.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
@@ -38,13 +38,13 @@ export default function ChatItem({ chat, onClick }: ChatItemProps) {
         {/* Chat Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-1">
-            <h3 className="text-sm font-medium text-gray-900 truncate">
+            <h3 className="text-sm font-medium text-foreground truncate">
               {chat.name}
             </h3>
-            <span className="text-xs text-gray-500">{chat.timestamp}</span>
+            <span className="text-xs text-muted-foreground">{chat.timestamp}</span>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-600 truncate flex-1">
+            <p className="text-sm text-muted-foreground truncate flex-1">
               {chat.lastMessage}
             </p>
             {chat.unreadCount > 0 && (

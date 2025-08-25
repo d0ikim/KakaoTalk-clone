@@ -89,31 +89,31 @@ export default function SettingsPage() {
     <div className="space-y-6">
       {/* 기본 프로필 표시 */}
       <div className="space-y-4">
-        <h3 className="text-base font-semibold text-gray-900">기본 프로필</h3>
+        <h3 className="text-base font-semibold text-foreground">기본 프로필</h3>
         <div className="space-y-3">
-          <div className="bg-gray-50 rounded-lg p-4">
-            <label className="block text-xs font-medium text-gray-600 mb-1">
+          <div className="bg-muted rounded-lg p-4">
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
               이메일
             </label>
-            <p className="text-sm text-gray-900">
+            <p className="text-sm text-foreground">
               {user?.email || "ahreum01060106@gmail.com"}
             </p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-4">
-            <label className="block text-xs font-medium text-gray-600 mb-1">
+          <div className="bg-muted rounded-lg p-4">
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
               ID
             </label>
-            <p className="text-sm text-gray-900">{user?.id || "papok0106"}</p>
+            <p className="text-sm text-foreground">{user?.id || "papok0106"}</p>
           </div>
         </div>
       </div>
 
       {/* 비밀번호 변경 */}
       <div className="space-y-4">
-        <h3 className="text-base font-semibold text-gray-900">비밀번호 변경</h3>
+        <h3 className="text-base font-semibold text-foreground">비밀번호 변경</h3>
         <div className="space-y-3">
           <div className="relative">
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-foreground mb-1">
               새 비밀번호
             </label>
             <Input
@@ -129,7 +129,7 @@ export default function SettingsPage() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-8 text-gray-500 hover:text-gray-700"
+              className="absolute right-3 top-8 text-muted-foreground hover:text-foreground"
             >
               {showPassword ? (
                 <EyeOff className="w-4 h-4" />
@@ -140,7 +140,7 @@ export default function SettingsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-foreground mb-1">
               새 비밀번호 확인
             </label>
             <Input
@@ -161,7 +161,7 @@ export default function SettingsPage() {
 
           <Button
             onClick={handlePasswordChange}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-sm"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm"
             disabled={!newPassword || !confirmPassword}
           >
             비밀번호 변경
@@ -171,18 +171,18 @@ export default function SettingsPage() {
 
       {/* ID 검색 허용 */}
       <div className="space-y-4">
-        <h3 className="text-base font-semibold text-gray-900">개인정보 설정</h3>
+        <h3 className="text-base font-semibold text-foreground">개인정보 설정</h3>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-gray-900">ID 검색 허용</p>
-            <p className="text-xs text-gray-600">
+            <p className="text-sm text-foreground">ID 검색 허용</p>
+            <p className="text-xs text-muted-foreground">
               다른 사용자가 ID로 검색할 수 있습니다
             </p>
           </div>
           <button
             onClick={() => setAllowIdSearch(!allowIdSearch)}
             className={`w-12 h-6 rounded-full transition-colors ${
-              allowIdSearch ? "bg-blue-500" : "bg-gray-300"
+              allowIdSearch ? "bg-primary" : "bg-muted"
             }`}
           >
             <div
@@ -196,7 +196,7 @@ export default function SettingsPage() {
 
       {/* 회원 탈퇴 */}
       <div className="space-y-4">
-        <h3 className="text-base font-semibold text-gray-900">계정 관리</h3>
+        <h3 className="text-base font-semibold text-foreground">계정 관리</h3>
         <Button
           variant="outline"
           className="w-full border-red-300 text-red-600 hover:bg-red-50 text-sm"
@@ -444,14 +444,14 @@ export default function SettingsPage() {
 
   return (
     <MobileLayout>
-      <div className="h-full bg-white">
+      <div className="h-full bg-background">
         {/* Header */}
-        <div className="px-4 py-3 border-b border-gray-100">
-          <h1 className="text-lg font-bold text-gray-900 text-center">설정</h1>
+        <div className="px-4 py-3 border-b border-border bg-card">
+          <h1 className="text-lg font-bold text-foreground text-center">설정</h1>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-100">
+        <div className="flex border-b border-border">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (
@@ -468,8 +468,8 @@ export default function SettingsPage() {
                 }
                 className={`flex-1 flex flex-col items-center py-2 px-2 transition-colors ${
                   activeTab === tab.id
-                    ? "text-blue-600 border-b-2 border-blue-600"
-                    : "text-gray-500 hover:text-gray-700"
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Icon className="w-4 h-4 mb-1" />

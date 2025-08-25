@@ -129,6 +129,33 @@ export const mockFriendsList: MockFriend[] = [
     isFavorite: false,
     birthday: "2020-01-15",
   },
+  {
+    id: "9",
+    name: "김민수",
+    avatar: "/person5.jpg",
+    statusMessage: "오늘 생일이에요! 🎂",
+    isOnline: true,
+    isFavorite: false,
+    birthday: "1996-12-25",
+  },
+  {
+    id: "10",
+    name: "이지은",
+    avatar: "/person6.jpg",
+    statusMessage: "생일 축하해주세요 💕",
+    isOnline: false,
+    isFavorite: false,
+    birthday: "1995-12-25",
+  },
+  {
+    id: "11",
+    name: "박준호",
+    avatar: "/person7.jpg",
+    statusMessage: "오늘 특별한 날이에요",
+    isOnline: true,
+    isFavorite: false,
+    birthday: "1997-12-25",
+  },
 ];
 
 // Mock Favorite Friends

@@ -50,8 +50,10 @@ export default function ProfileModal({
 
   const handleStartChat = () => {
     if (isMyProfile) {
-      router.push("/chats");
+      // 내 프로필일 때는 나와의 채팅방으로 이동
+      router.push("/chat");
     } else {
+      // 다른 사람의 프로필일 때는 해당 친구와의 채팅방으로 이동
       router.push(`/chats/${profile.id}`);
     }
     onClose();
@@ -113,7 +115,7 @@ export default function ProfileModal({
           )}
           {/* 기본 그라데이션 배경 (이미지 로드 실패 시 대체) */}
           <div
-            className={`w-full h-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-400 ${
+            className={`w-full h-full bg-gradient-to-br from-pink-200 via-pink-300 to-pink-400 ${
               profile.avatar ? "hidden" : ""
             }`}
           />
@@ -160,17 +162,19 @@ export default function ProfileModal({
 
         {/* Bottom Buttons */}
         <div className="absolute bottom-10 left-0 right-0 z-30 flex items-center justify-center space-x-4">
-          <Button
-            onClick={handleStartChat}
-            className="w-32 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full flex flex-col items-center justify-center transition-colors cursor-pointer"
-          >
-            <MessageCircle className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">나와의 채팅</span>
-          </Button>
+          {isMyProfile && (
+            <Button
+              onClick={handleStartChat}
+              className="w-32 h-12 bg-pink-400/80 hover:bg-pink-500/90 text-white rounded-full flex flex-col items-center justify-center transition-colors cursor-pointer border-2 border-white/30"
+            >
+              <MessageCircle className="w-5 h-5 mb-1" />
+              <span className="text-xs font-medium">나와의 채팅</span>
+            </Button>
+          )}
           {isMyProfile && (
             <Button
               onClick={handleEditProfile}
-              className="w-32 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full flex flex-col items-center justify-center transition-colors cursor-pointer"
+              className="w-32 h-12 bg-pink-400/80 hover:bg-pink-500/90 text-white rounded-full flex flex-col items-center justify-center transition-colors cursor-pointer border-2 border-white/30"
             >
               <Edit3 className="w-5 h-5 mb-1" />
               <span className="text-xs font-medium">프로필 편집</span>

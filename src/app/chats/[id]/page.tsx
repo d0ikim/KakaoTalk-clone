@@ -97,7 +97,7 @@ export default function ChatRoomPage() {
 
   return (
     <MobileLayout showLeftNav={false}>
-      <div className="h-full bg-white flex flex-col">
+      <div className="h-full bg-pink-50 flex flex-col">
         {/* Header */}
         <ChatHeader
           friend={friend}

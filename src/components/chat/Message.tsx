@@ -25,25 +25,27 @@ export default function Message({ message, friendAvatar }: MessageProps) {
           <div className="flex items-center space-x-2 mb-1">
             <Avatar className="w-6 h-6">
               <AvatarImage src={friendAvatar} />
-              <AvatarFallback className="text-xs font-medium bg-gray-200">
+              <AvatarFallback className="text-xs font-medium bg-pink-200 text-pink-700">
                 {message.senderName.charAt(0)}
               </AvatarFallback>
             </Avatar>
-            <span className="text-xs text-gray-500">{message.senderName}</span>
+            <span className="text-xs text-pink-600">{message.senderName}</span>
           </div>
         )}
         <div
           className={`px-3 py-2 rounded-lg ${
             message.isOwn
-              ? "bg-blue-500 text-white"
-              : "bg-gray-100 text-gray-900"
+              ? "bg-pink-400 text-white"
+              : "bg-white text-gray-900 border border-pink-200 shadow-sm"
           }`}
         >
           <p className="text-sm">{message.content}</p>
         </div>
         <p
-          className={`text-xs text-gray-500 mt-1 ${
-            message.isOwn ? "text-right" : "text-left"
+          className={`text-xs mt-1 ${
+            message.isOwn 
+              ? "text-right text-pink-100" 
+              : "text-left text-pink-500"
           }`}
         >
           {message.timestamp}

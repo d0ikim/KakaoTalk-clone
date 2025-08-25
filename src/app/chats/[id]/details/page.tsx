@@ -266,33 +266,33 @@ export default function ChatDetailsPage() {
 
   return (
     <MobileLayout showLeftNav={false}>
-      <div className="h-full bg-white flex flex-col">
+      <div className="h-full bg-pink-50 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
+        <div className="flex items-center justify-between p-4 border-b border-pink-200 bg-pink-100">
           <div className="flex items-center space-x-3">
             <button
               onClick={() => router.back()}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="p-2 hover:bg-pink-200 rounded-full transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-gray-500" />
+              <ArrowLeft className="w-5 h-5 text-pink-700" />
             </button>
             <Avatar className="w-10 h-10">
               <AvatarImage src={friend.avatar} />
-              <AvatarFallback className="text-sm font-medium bg-gray-200">
+              <AvatarFallback className="text-sm font-medium bg-pink-200 text-pink-700">
                 {friend.name.charAt(0)}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className="text-lg font-semibold text-pink-900">
                 {friend.name}
               </h3>
-              <p className="text-sm text-gray-500">채팅방 상세정보</p>
+              <p className="text-sm text-pink-700">채팅방 상세정보</p>
             </div>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-100">
+        <div className="flex border-b border-pink-200 bg-white">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -303,14 +303,14 @@ export default function ChatDetailsPage() {
               }
               className={`flex-1 py-3 px-2 text-sm font-medium transition-colors relative ${
                 activeTab === tab.id
-                  ? "text-blue-600 border-b-2 border-blue-600"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "text-pink-600 border-b-2 border-pink-600"
+                  : "text-gray-500 hover:text-pink-700"
               }`}
             >
               <div className="flex flex-col items-center space-y-1">
                 <tab.icon className="w-4 h-4" />
                 <span className="text-xs">{tab.label}</span>
-                <span className="text-xs bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded-full">
+                <span className="text-xs bg-pink-200 text-pink-600 px-1.5 py-0.5 rounded-full">
                   {tab.count}
                 </span>
               </div>
@@ -319,7 +319,7 @@ export default function ChatDetailsPage() {
         </div>
 
         {/* Content */}
-        <div className="flex-1 p-4 overflow-y-auto">{renderContent()}</div>
+        <div className="flex-1 p-4 overflow-y-auto bg-white">{renderContent()}</div>
       </div>
     </MobileLayout>
   );

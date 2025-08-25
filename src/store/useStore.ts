@@ -76,6 +76,7 @@ interface AppState {
   // User state
   user: User | null;
   setUser: (user: User | null) => void;
+  logout: () => void;
 
   // Friends state
   friends: Friend[];
@@ -121,6 +122,15 @@ export const useStore = create<AppState>((set) => ({
   // User state
   user: null,
   setUser: (user) => set({ user }),
+  logout: () => set({ 
+    user: null, 
+    isLocked: false, 
+    currentPage: "login",
+    friends: [],
+    chats: [],
+    messages: {},
+    notifications: []
+  }),
 
   // Friends state
   friends: [],
@@ -208,9 +218,9 @@ export const useStore = create<AppState>((set) => ({
     })),
 
   // UI state
-  isLocked: true,
+  isLocked: false,
   setIsLocked: (locked) => set({ isLocked: locked }),
-  currentPage: "lock",
+  currentPage: "login",
   setCurrentPage: (page) => set({ currentPage: page }),
 
   // SSR state

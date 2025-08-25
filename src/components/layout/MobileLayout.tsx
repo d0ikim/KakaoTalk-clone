@@ -2,7 +2,7 @@
 import React from "react";
 import { useStore } from "@/store/useStore";
 import { useRouter } from "next/navigation";
-import { Settings, User, MessageCircle } from "lucide-react";
+import { Settings, User, MessageCircle, Lock, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -21,16 +21,19 @@ export default function MobileLayout({
   children,
   showLeftNav = true,
 }: MobileLayoutProps) {
-  const { setCurrentPage, setIsLocked } = useStore();
+  const { setCurrentPage, setIsLocked, logout } = useStore();
   const router = useRouter();
 
   const handleLogout = () => {
-    setIsLocked(true);
-    setCurrentPage("lock");
+    if (confirm("정말 로그아웃하시겠습니까?")) {
+      logout();
+      router.push("/");
+    }
   };
 
   const handleLockMode = () => {
     setIsLocked(true);
+    router.push("/lock");
   };
 
   const handleUserClick = () => {
@@ -107,17 +110,25 @@ export default function MobileLayout({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="p-0 w-6 h-6 sm:w-7 sm:h-7"
+                      className="p-0 w-6 h-6 sm:w-7 sm:h-7 hover:bg-pink-100"
                     >
-                      <Settings className="w-6 h-6 sm:w-7 sm:h-7 text-gray-600" />
+                      <Settings className="w-6 h-6 sm:w-7 sm:h-7 text-gray-600 hover:text-pink-600" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-40 sm:w-48">
-                    <DropdownMenuItem onClick={handleLockMode}>
-                      잠금모드
+                  <DropdownMenuContent align="end" className="w-40 sm:w-48 bg-white border-pink-200">
+                    <DropdownMenuItem 
+                      onClick={handleLockMode}
+                      className="flex items-center space-x-2 text-pink-700 hover:bg-pink-50 cursor-pointer"
+                    >
+                      <Lock className="w-4 h-4" />
+                      <span>잠금모드</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleLogout}>
-                      로그아웃
+                    <DropdownMenuItem 
+                      onClick={handleLogout}
+                      className="flex items-center space-x-2 text-red-600 hover:bg-red-50 cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>로그아웃</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
