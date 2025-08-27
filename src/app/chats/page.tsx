@@ -5,7 +5,9 @@ import MobileLayout from "@/components/layout/MobileLayout";
 import ChatListHeader from "@/components/chat/ChatListHeader";
 import SearchBar from "@/components/chat/SearchBar";
 import ChatItem from "@/components/chat/ChatItem";
+import FriendSelectionModal from "@/components/ui/friend-selection-modal";
 import { mockFriends } from "@/mock";
+import { MockFriend } from "@/mock/types";
 
 // Mock 채팅 데이터 생성
 const mockChats = mockFriends.map((friend, index) => ({
@@ -30,6 +32,7 @@ export default function ChatsPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [showFriendSelectionModal, setShowFriendSelectionModal] = useState(false);
 
   const filteredChats = mockChats.filter(
     (chat) =>
@@ -43,6 +46,16 @@ export default function ChatsPage() {
 
   const handleToggleSearch = () => setShowSearch(!showSearch);
 
+  const handleOpenNewChat = () => {
+    setShowFriendSelectionModal(true);
+  };
+
+  const handleStartChat = (friend: MockFriend) => {
+    // 새 채팅방으로 이동 (현재는 기존 채팅방으로 이동)
+    router.push(`/chats/${friend.id}`);
+    setShowFriendSelectionModal(false);
+  };
+
   return (
     <MobileLayout>
       <div className="h-full bg-white flex flex-col">
@@ -50,6 +63,7 @@ export default function ChatsPage() {
         <ChatListHeader
           showSearch={showSearch}
           onToggleSearch={handleToggleSearch}
+          onOpenNewChat={handleOpenNewChat}
         />
 
         {/* Search Bar */}
@@ -70,6 +84,13 @@ export default function ChatsPage() {
             />
           ))}
         </div>
+
+        {/* Friend Selection Modal */}
+        <FriendSelectionModal
+          isOpen={showFriendSelectionModal}
+          onClose={() => setShowFriendSelectionModal(false)}
+          onStartChat={handleStartChat}
+        />
       </div>
     </MobileLayout>
   );

@@ -1,30 +1,34 @@
 import React from "react";
-import { Search, UserPlus, MoreHorizontal } from "lucide-react";
+import { Search, MessageCircle, MoreHorizontal } from "lucide-react";
 
 interface ChatListHeaderProps {
   showSearch: boolean;
   onToggleSearch: () => void;
+  onOpenNewChat: () => void;
 }
 
 export default function ChatListHeader({
   showSearch,
   onToggleSearch,
+  onOpenNewChat,
 }: ChatListHeaderProps) {
   return (
-    <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between bg-white">
-      <h1 className="text-lg font-bold text-gray-900">채팅</h1>
+    <div className="flex items-center justify-between p-3 border-b border-pink-200 bg-pink-100">
+      <div className="flex items-center space-x-2">
+        <h1 className="text-xl font-bold text-pink-900">채팅</h1>
+      </div>
       <div className="flex items-center space-x-2">
         <button
           onClick={onToggleSearch}
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          className="p-1.5 text-pink-700 hover:bg-pink-200 rounded-lg transition-colors"
         >
-          <Search className="w-4 h-4 text-gray-600" />
+          <Search className="w-4 h-4" />
         </button>
-        <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-          <UserPlus className="w-4 h-4 text-gray-600" />
-        </button>
-        <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-          <MoreHorizontal className="w-4 h-4 text-gray-600" />
+        <button 
+          onClick={onOpenNewChat}
+          className="p-1.5 text-pink-700 hover:bg-pink-200 rounded-lg transition-colors"
+        >
+          <MessageCircle className="w-4 h-4" />
         </button>
       </div>
     </div>

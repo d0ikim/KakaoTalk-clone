@@ -41,69 +41,65 @@ export default function LockPage() {
 
   return (
     <MobileLayout showLeftNav={false}>
-      <div className="h-full bg-gradient-to-br from-pink-50 to-pink-100 flex flex-col items-center justify-center p-4">
-        {/* 잠금 모드 제목 */}
-        <h1 className="text-2xl font-bold text-pink-900 mb-8">잠금 모드</h1>
+      <div className="h-full w-full bg-gradient-to-br from-pink-50 to-pink-100 flex flex-col items-center justify-center relative overflow-hidden">
+        {/* 배경 이미지 (흐릿한 야외 풍경) */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-green-200 to-blue-300 opacity-30"></div>
         
-        {/* 모바일 디바이스 모양의 잠금 화면 */}
-        <div className="w-80 h-96 bg-pink-200 rounded-3xl p-6 shadow-2xl border-4 border-pink-300 relative">
-          {/* 윈도우 컨트롤 버튼들 */}
-          <div className="flex space-x-2 mb-6">
-            <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-            <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-          </div>
-
-          {/* 프로필 정보 */}
-          <div className="flex flex-col items-center mb-8">
-            <Avatar className="w-20 h-20 mb-4 border-4 border-white shadow-lg">
+        
+        
+        {/* 중앙의 핑크색 앱 화면 */}
+        <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-300 p-6 shadow-2xl relative z-10 flex flex-col items-center justify-center">
+          {/* 프로필 사진 (중앙 상단) */}
+          <div className="flex flex-col items-center mb-6">
+            <Avatar className="w-40 h-40 mb-4 shadow-lg">
               <AvatarImage src={mockUser.avatar} />
-              <AvatarFallback className="text-2xl font-bold bg-pink-300 text-white">
+              <AvatarFallback className="text-2xl font-bold bg-pink-400 text-white">
                 {mockUser.name.charAt(0)}
               </AvatarFallback>
             </Avatar>
-            <p className="text-sm text-pink-800 font-medium">
+          </div>
+
+          {/* 이메일 주소 */}
+          <div className="text-center mb-4">
+            <p className="text-sm text-pink-900 font-medium">
               {mockUser.email.replace(/(.{2}).*@/, "$1***********@")}
             </p>
           </div>
 
-          {/* 잠금 모드 상태 */}
+          {/* 상태 메시지 */}
           <div className="text-center mb-6">
-            <p className="text-lg font-bold text-pink-900">
+            <p className="text-sm text-pink-900">
               잠금모드 상태입니다.
             </p>
           </div>
 
-          {/* 비밀번호 입력 */}
-          <div className="mb-6">
-            <Input
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="w-full bg-white border-pink-300 focus:border-pink-500 focus:ring-pink-500 text-center text-pink-900 placeholder-pink-600"
-            />
+          {/* 비밀번호 입력 필드 */}
+          <div className="mb-4 w-80">
+            <div className="bg-white rounded-lg p-2 border border-pink-200">
+              <div className="flex items-center">
+                <span className="text-sm text-gray-600 mr-3">비밀번호</span>
+                <Input
+                  type="password"
+                  placeholder=""
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="flex-1 bg-transparent border-none text-pink-900 placeholder-transparent focus:ring-0 focus:border-none"
+                />
+              </div>
+            </div>
           </div>
 
           {/* 확인 버튼 */}
-          <div className="mb-6">
-            <Button
-              onClick={handleUnlock}
-              className="w-full bg-pink-300 hover:bg-pink-400 text-pink-900 border border-pink-400 font-medium"
-            >
-              확인
-            </Button>
-          </div>
-
-          {/* 다른 사용자로 전환 */}
-          <div className="text-center">
-            <button
-              onClick={handleSwitchUser}
-              className="text-sm text-pink-700 hover:text-pink-900 underline"
-            >
-              다른 사용자로 전환
-            </button>
+          <div className="mb-6 w-80">
+            <div className="bg-white rounded-lg p-3 border border-pink-200 cursor-pointer hover:bg-pink-50 transition-colors">
+              <button
+                onClick={handleUnlock}
+                className="w-full text-center text-sm text-gray-600 font-medium"
+              >
+                확인
+              </button>
+            </div>
           </div>
         </div>
       </div>

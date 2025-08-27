@@ -446,8 +446,10 @@ export default function SettingsPage() {
     <MobileLayout>
       <div className="h-full bg-background">
         {/* Header */}
-        <div className="px-4 py-3 border-b border-border bg-card">
-          <h1 className="text-lg font-bold text-foreground text-center">설정</h1>
+        <div className="flex items-center justify-between p-3 border-b border-pink-200 bg-pink-100">
+          <div className="flex items-center space-x-2">
+            <h1 className="text-xl font-bold text-pink-900">설정</h1>
+          </div>
         </div>
 
         {/* Tabs */}
