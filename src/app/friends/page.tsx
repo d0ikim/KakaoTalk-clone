@@ -10,7 +10,7 @@ import {
   Users,
   X,
   ChevronRight,
-  Gift,
+  
 } from "lucide-react";
 
 import { mockUser, mockFriendsList, mockFavoriteFriends } from "@/mock/data";
@@ -151,63 +151,7 @@ export default function FriendsPage() {
             </div>
           </div>
 
-          {/* 생일인 친구 섹션 */}
-          {testBirthdayFriends.length > 0 && (
-            <div className="border-b border-pink-200 bg-white">
-              <button
-                onClick={() => setShowBirthdayFriends(!showBirthdayFriends)}
-                className="w-full p-3 flex items-center justify-between hover:bg-pink-50"
-              >
-                <div className="flex items-center space-x-2">
-                  <Gift className="h-4 w-4 text-pink-500" />
-                  <span className="font-medium text-gray-900 text-sm">
-                    생일인 친구 {testBirthdayFriends.length}
-                  </span>
-                </div>
-                <span className="text-pink-600 text-sm">
-                  {showBirthdayFriends ? "▼" : "▶"}
-                </span>
-              </button>
-
-              {showBirthdayFriends && (
-                <div className="px-3 pb-3">
-                  <div className="space-y-2">
-                    {testBirthdayFriends.map((friend) => (
-                      <div
-                        key={friend.id}
-                        className="flex items-center space-x-3 p-2.5 hover:bg-pink-100 rounded-lg cursor-pointer transition-colors border border-pink-200"
-                        onClick={() => openProfileModal(friend)}
-                      >
-                        <Avatar className="h-9 w-9">
-                          <AvatarImage src={friend.avatar} />
-                          <AvatarFallback className="bg-pink-200 text-pink-700 text-sm">
-                            {friend.name.charAt(0)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-gray-900 text-sm">
-                            {friend.name}
-                          </h4>
-                          <p className="text-xs text-gray-600">
-                            {friend.statusMessage}
-                          </p>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <div
-                            className={`w-1.5 h-1.5 rounded-full ${
-                              friend.isOnline ? "bg-green-500" : "bg-gray-400"
-                            }`}
-                          />
-                          <Gift className="h-3.5 w-3.5 text-pink-500" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
+          {/* 즐겨찾기 친구 섹션 */}
           {mockFavoriteFriends.length > 0 && (
             <div className="border-b border-pink-200 bg-white">
               <button
@@ -249,12 +193,59 @@ export default function FriendsPage() {
                           </p>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div
-                            className={`w-1.5 h-1.5 rounded-full ${
-                              friend.isOnline ? "bg-green-500" : "bg-gray-400"
-                            }`}
-                          />
-                          <Heart className="h-3.5 w-3.5 text-yellow-500 fill-current" />
+                          
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* 생일인 친구 섹션 */}
+          {testBirthdayFriends.length > 0 && (
+            <div className="border-b border-pink-200 bg-white">
+              <button
+                onClick={() => setShowBirthdayFriends(!showBirthdayFriends)}
+                className="w-full p-3 flex items-center justify-between hover:bg-pink-50"
+              >
+                <div className="flex items-center space-x-2">
+                  
+                  <span className="font-medium text-gray-900 text-sm">
+                    생일인 친구 {testBirthdayFriends.length}
+                  </span>
+                </div>
+                <span className="text-pink-600 text-sm">
+                  {showBirthdayFriends ? "▼" : "▶"}
+                </span>
+              </button>
+
+              {showBirthdayFriends && (
+                <div className="px-3 pb-3">
+                  <div className="space-y-2">
+                    {testBirthdayFriends.map((friend) => (
+                      <div
+                        key={friend.id}
+                        className="flex items-center space-x-3 p-2.5 hover:bg-pink-100 rounded-lg cursor-pointer transition-colors border border-pink-200"
+                        onClick={() => openProfileModal(friend)}
+                      >
+                        <Avatar className="h-9 w-9">
+                          <AvatarImage src={friend.avatar} />
+                          <AvatarFallback className="bg-pink-200 text-pink-700 text-sm">
+                            {friend.name.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900 text-sm">
+                            {friend.name}
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            {friend.statusMessage}
+                          </p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          
                         </div>
                       </div>
                     ))}
@@ -301,28 +292,12 @@ export default function FriendsPage() {
                       </p>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          friend.isOnline ? "bg-green-500" : "bg-gray-400"
-                        }`}
-                      />
+                      
                     </div>
                   </div>
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="p-3 border-t border-pink-200 bg-white">
-            <div className="flex items-center space-x-3 p-2.5 hover:bg-pink-100 rounded-lg cursor-pointer transition-colors">
-              <div className="w-10 h-10 bg-pink-400 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">Ch</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-medium text-gray-900 text-sm">채널</h4>
-                <p className="text-xs text-gray-600">300</p>
-              </div>
-            </div>
           </div>
         </div>
 

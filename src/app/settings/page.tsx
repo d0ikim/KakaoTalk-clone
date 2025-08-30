@@ -182,7 +182,7 @@ export default function SettingsPage() {
           <button
             onClick={() => setAllowIdSearch(!allowIdSearch)}
             className={`w-12 h-6 rounded-full transition-colors ${
-              allowIdSearch ? "bg-primary" : "bg-muted"
+              allowIdSearch ? "bg-pink-500" : "bg-gray-300"
             }`}
           >
             <div
@@ -224,7 +224,7 @@ export default function SettingsPage() {
           <button
             onClick={() => setNotificationsEnabled(!notificationsEnabled)}
             className={`w-12 h-6 rounded-full transition-colors ${
-              notificationsEnabled ? "bg-blue-500" : "bg-gray-300"
+              notificationsEnabled ? "bg-pink-500" : "bg-gray-300"
             }`}
           >
             <div
@@ -251,7 +251,7 @@ export default function SettingsPage() {
                   e.target.value as "sender+message" | "sender"
                 )
               }
-              className="w-4 h-4 text-blue-600"
+              className="w-4 h-4 text-pink-600"
             />
             <div>
               <p className="text-sm text-gray-900">보낸사람 + 메시지</p>
@@ -272,7 +272,7 @@ export default function SettingsPage() {
                   e.target.value as "sender+message" | "sender"
                 )
               }
-              className="w-4 h-4 text-blue-600"
+              className="w-4 h-4 text-pink-600"
             />
             <div>
               <p className="text-sm text-gray-900">보낸사람만</p>
@@ -371,7 +371,7 @@ export default function SettingsPage() {
           <button
             onClick={() => setDarkMode(!darkMode)}
             className={`w-12 h-6 rounded-full transition-colors ${
-              darkMode ? "bg-blue-500" : "bg-gray-300"
+              darkMode ? "bg-pink-500" : "bg-gray-300"
             }`}
           >
             <div
@@ -416,7 +416,7 @@ export default function SettingsPage() {
             <Button
               variant={fontSize === "small" ? "default" : "outline"}
               onClick={() => setFontSize("small")}
-              className={`text-xs ${fontSize === "small" ? "bg-blue-500" : ""}`}
+              className={`text-xs ${fontSize === "small" ? "bg-pink-500 text-white" : ""}`}
             >
               작게
             </Button>
@@ -424,7 +424,7 @@ export default function SettingsPage() {
               variant={fontSize === "medium" ? "default" : "outline"}
               onClick={() => setFontSize("medium")}
               className={`text-xs ${
-                fontSize === "medium" ? "bg-blue-500" : ""
+                fontSize === "medium" ? "bg-pink-500 text-white" : ""
               }`}
             >
               보통
@@ -432,7 +432,7 @@ export default function SettingsPage() {
             <Button
               variant={fontSize === "large" ? "default" : "outline"}
               onClick={() => setFontSize("large")}
-              className={`text-xs ${fontSize === "large" ? "bg-blue-500" : ""}`}
+              className={`text-xs ${fontSize === "large" ? "bg-pink-500 text-white" : ""}`}
             >
               크게
             </Button>

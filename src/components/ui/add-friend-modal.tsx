@@ -159,7 +159,7 @@ export default function AddFriendModal({
           {/* Add Button */}
           <Button
             onClick={handleAddFriend}
-            className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 text-xs font-medium"
+            className="w-full mt-4 bg-pink-400 hover:bg-pink-500 text-white rounded-lg py-2 text-xs font-medium"
           >
             추가
           </Button>

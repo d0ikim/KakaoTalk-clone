@@ -116,11 +116,6 @@ export default function FriendSelectionModal({
                     {friend.statusMessage}
                   </p>
                 </div>
-                <div
-                  className={`w-2 h-2 rounded-full ${
-                    friend.isOnline ? "bg-green-500" : "bg-gray-400"
-                  }`}
-                />
               </div>
             ))}
           </div>
