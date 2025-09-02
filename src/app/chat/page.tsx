@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { Search, Smile, Calendar, Clock, Folder, Plus } from "lucide-react";
+import { Search, Smile, Calendar, Clock, Folder, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -12,6 +12,8 @@ export default function ChatPage() {
   const [mounted, setMounted] = useState(false);
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<MockChatMessage[]>([]);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setMounted(true);
@@ -36,6 +38,17 @@ export default function ChatPage() {
     }
   };
 
+  const handleToggleSearch = () => {
+    setShowSearch(!showSearch);
+    if (showSearch) {
+      setSearchQuery("");
+    }
+  };
+
+  const filteredMessages = chatMessages.filter((msg) =>
+    msg.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (!mounted) {
     return null;
   }
@@ -56,8 +69,13 @@ export default function ChatPage() {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" className="p-2 text-pink-700 hover:bg-pink-200">
-              <Search className="w-5 h-5" />
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="p-2 text-pink-700 hover:bg-pink-200"
+              onClick={handleToggleSearch}
+            >
+              {showSearch ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
             </Button>
             <Button variant="ghost" size="sm" className="p-2 text-pink-700 hover:bg-pink-200">
               <Calendar className="w-5 h-5" />
@@ -68,9 +86,27 @@ export default function ChatPage() {
           </div>
         </div>
 
+        {/* 검색창 */}
+        {showSearch && (
+          <div className="p-4 border-b border-pink-200 bg-white">
+            <Input
+              type="text"
+              placeholder="메시지 검색..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full border-pink-300 focus:border-pink-500 focus:ring-pink-500"
+            />
+            {searchQuery && (
+              <div className="mt-2 text-sm text-pink-600">
+                검색 결과: {filteredMessages.length}개
+              </div>
+            )}
+          </div>
+        )}
+
         {/* 채팅 메시지 */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {chatMessages.map((msg: MockChatMessage) => (
+          {(searchQuery ? filteredMessages : chatMessages).map((msg: MockChatMessage) => (
             <div
               key={msg.id}
               className={`flex ${

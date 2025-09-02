@@ -58,6 +58,8 @@ export default function ChatRoomPage() {
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState(mockMessages);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // 친구 정보 찾기
   const friend = mockFriends.find((f) => f.id === chatId);
@@ -92,6 +94,17 @@ export default function ChatRoomPage() {
     }
   };
 
+  const handleSearchToggle = (show: boolean) => {
+    setShowSearch(show);
+    if (!show) {
+      setSearchQuery("");
+    }
+  };
+
+  const filteredMessages = messages.filter((msg) =>
+    msg.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleBack = () => router.back();
   const handleDetails = () => router.push(`/chats/${chatId}/details`);
 
@@ -103,11 +116,13 @@ export default function ChatRoomPage() {
           friend={friend}
           onBack={handleBack}
           onDetails={handleDetails}
+          onSearchToggle={handleSearchToggle}
+          showSearch={showSearch}
         />
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((msg) => (
+          {(searchQuery ? filteredMessages : messages).map((msg) => (
             <Message key={msg.id} message={msg} friendAvatar={friend.avatar} />
           ))}
         </div>
